@@ -15,3 +15,30 @@ theme_set(theme_bw())
 ```{r read}
 atividade = read_projectdata()
 ```
+
+Questão 1: Qual a casa com o maior engajamento_total(medio)?
+```{r read}
+  atividade[is.na(atividade)] = 0
+  
+  atividade %>%
+    ggplot(x=casa, y=engaj_total)
+  
+  atividade %>%
+    group_by(casa) %>%
+    summarize(tst = mean(engaj_total))
+```
+
+
+
+Questão 2: Quantos e quais parlamentares não tem twitter?
+
+```{r read}
+  atividade %>%
+    filter(twitter == 0) %>%
+    select(nome_eleitoral)
+
+  atividade %>%
+    filter(twitter == 0) %>%
+    summarize(n())
+    
+```
