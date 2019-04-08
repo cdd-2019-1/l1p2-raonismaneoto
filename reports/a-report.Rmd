@@ -17,21 +17,31 @@ atividade = read_projectdata()
 ```
 
 Questão 1: Qual a casa com o maior engajamento_total(medio)?
+Os dados estão sendo muito influenciados por valores extremos.
+Talvez pareça haver algum sentido na minha hipótese. (por incrível que pareça)
 ```{r read}
   atividade[is.na(atividade)] = 0
   
-  atividade %>%
-    ggplot(x=casa, y=engaj_total)
+  atividade_ <- atividade %>% group_by(casa)
   
-  atividade %>%
-    group_by(casa) %>%
+  atividade_ %>%
     summarize(tst = mean(engaj_total))
+  
+  atividade_camara <- atividade_ %>% filter(casa == "câmara")
+  
+  hist(atividade_camara$engaj_total)
+  
+  atividade_senado <- atividade_ %>% filter(casa == "senado")
+  
+  boxplot(atividade_senado$engaj_total)
 ```
 
 
 
 Questão 2: Quantos e quais parlamentares não tem twitter?
-
+Sem esses que não twitter, qual o engajamento total médio por casa?(A diferença entre as duas casas aumenta bastante uma vez que apenas dois senadores não usam a rede social.)
+10% dos parlamentares da câmara não tem twitter enquanto que apenas 2% dos senadores não fazem uso da rede social.
+Talvez isso indique que não há relação entre a "sabedoria" e o engajamento uma vez que supostamente os senadores são mais sabidos que os da  Ou não, uma vez que os dados estão sendo muito influenciados por valores extremos.
 ```{r read}
   atividade %>%
     filter(twitter == 0) %>%
@@ -41,4 +51,32 @@ Questão 2: Quantos e quais parlamentares não tem twitter?
     filter(twitter == 0) %>%
     summarize(n())
     
+  atividade_ %>%
+    filter(twitter != 0) %>%
+    summarize(tst = mean(engaj_total) )
+
+  atividade %>%
+    filter(twitter == 0 & casa == "câmara") %>%
+    select(nome_eleitoral)
+  
+  atividade %>%
+    filter(twitter == 0 & casa == "câmara") %>%
+    summarize(n())
+  
+  atividade %>%
+    filter(twitter == 0 & casa == "senado") %>%
+    select(nome_eleitoral)
+  
+  atividade %>%
+    filter(twitter == 0 & casa == "senado") %>%
+    summarize(n())
+  
+  atividade %>%
+    filter(casa == "senado") %>%
+    summarize(n())
+  
+  atividade %>%
+    filter(casa == "câmara") %>%
+    summarize(n())
+  
 ```
