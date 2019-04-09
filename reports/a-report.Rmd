@@ -19,7 +19,9 @@ atividade = read_projectdata()
 
 Questão 1: Qual a casa com o maior engajamento_total(medio)? (Ou seja, qual a casa que tem maior engajamento por parlamentar?) A câmara ganha nesse quesito.
 Os dados estão sendo muito influenciados por valores extremos.
+
 Talvez há algum sentido na minha hipótese de que o senado, por ser a parte supostamente mais sabida do congresso, posta coisas mais engajadas. A resposta da próxima pergunta indica isso.
+
 Qual a casa com a maior mediana do engajamento_total? O senado tem ampla vantagem sobre a câmara nessa estatística.
 Mesmo divido por 1000000 o boxplot referente aos engaj_total ficaram muito deformados devido a característica dos dados. Muitos outliers detectados.
 ```{r }
@@ -45,8 +47,11 @@ Mesmo divido por 1000000 o boxplot referente aos engaj_total ficaram muito defor
 
 
 Questão 2: Quantos e quais parlamentares não tem twitter?
+
 Sem esses que não twitter, qual o engajamento total médio por casa?(A diferença entre as duas casas aumenta bastante uma vez que apenas dois senadores não usam a rede social.)
+
 10% dos parlamentares da câmara não tem twitter enquanto que apenas 2% dos senadores não fazem uso da rede social.
+
 Apesar disso, conforme respondido acima, os dados estão sendo muito influenciados por valores extremos.
 ```{r read}
   atividade %>%
